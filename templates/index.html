@@ -1,0 +1,35 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment & Emotion Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Twitter-RoBERTa Sentiment & Emotion Analysis</h1>
+    <form method="POST" action="/">
+        <textarea name="user_text" rows="4" cols="50" placeholder="Enter your text here...">{{ user_text }}</textarea>
+        <br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if sentiment_result %}
+        <h2>Sentiment Analysis</h2>
+        <ul>
+            {% for (label, prob) in sentiment_result %}
+            <li>{{ label }}: {{ prob|round(4) }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if emotion_result %}
+        <h2>Emotion Analysis</h2>
+        <ul>
+            {% for (label, prob) in emotion_result %}
+            <li>{{ label }}: {{ prob|round(4) }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

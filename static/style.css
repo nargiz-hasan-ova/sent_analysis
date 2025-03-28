@@ -1,0 +1,15 @@
+/* static/style.css */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    max-width: 600px;
+}
+
+h1 {
+    margin-bottom: 1rem;
+}
+
+textarea {
+    width: 100%;
+    font-size: 1em;
+}
