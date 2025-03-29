@@ -43,6 +43,9 @@ def load_model_and_labels(task_name):
 
     return tokenizer, model, labels
 
+def load_hate_model():
+    return load_model_and_labels("hate")
+
 def get_prediction(tokenizer, model, labels, text):
     """
     Given a tokenizer, model, and labels, run inference on text, returning

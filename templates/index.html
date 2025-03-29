@@ -1,35 +1,95 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Sentiment & Emotion Classifier</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <title>Multi-Task Twitter-roBERTa</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 </head>
-<body>
-    <h1>Twitter-RoBERTa Sentiment & Emotion Analysis</h1>
-    <form method="POST" action="/">
-        <textarea name="user_text" rows="4" cols="50" placeholder="Enter your text here...">{{ user_text }}</textarea>
-        <br><br>
-        <button type="submit">Analyze</button>
-    </form>
+<body class="bg-light">
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
 
-    {% if sentiment_result %}
-        <h2>Sentiment Analysis</h2>
-        <ul>
-            {% for (label, prob) in sentiment_result %}
-            <li>{{ label }}: {{ prob|round(4) }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <h1 class="mb-4 text-center">Multi-Task Twitter-roBERTa</h1>
 
-    {% if emotion_result %}
-        <h2>Emotion Analysis</h2>
-        <ul>
-            {% for (label, prob) in emotion_result %}
-            <li>{{ label }}: {{ prob|round(4) }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <!-- Form Card -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <form method="POST" action="/">
+              <div class="mb-3">
+                <label for="user_text" class="form-label fw-semibold">
+                  Enter your text:
+                </label>
+                <textarea
+                  class="form-control"
+                  id="user_text"
+                  name="user_text"
+                  rows="3"
+                  placeholder="Type something..."
+                >{{ user_text }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Analyze</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        {% if sentiment_result or emotion_result or hate_result %}
+        <div class="card">
+          <div class="card-body">
+
+            <!-- Sentiment Analysis -->
+            {% if sentiment_result %}
+              <h2 class="h5 mb-3">Sentiment Analysis</h2>
+              <ul class="list-group list-group-flush mb-3">
+                {% for label, prob in sentiment_result %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="text-capitalize">{{ label }}</span>
+                  <span class="badge bg-secondary">{{ prob|round(4) }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <!-- Emotion Analysis -->
+            {% if emotion_result %}
+              <h2 class="h5 mb-3">Emotion Analysis</h2>
+              <ul class="list-group list-group-flush mb-3">
+                {% for label, prob in emotion_result %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="text-capitalize">{{ label }}</span>
+                  <span class="badge bg-secondary">{{ prob|round(4) }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <!-- Hate Speech Detection -->
+            {% if hate_result %}
+              <h2 class="h5 mb-3">Hate Speech Detection</h2>
+              <ul class="list-group list-group-flush mb-3">
+                {% for label, prob in hate_result %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span class="text-capitalize">{{ label }}</span>
+                  <span class="badge bg-secondary">{{ prob|round(4) }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
