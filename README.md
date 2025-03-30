@@ -22,12 +22,7 @@ A lightweight Flask application demonstrating **sentiment analysis**, **emotion 
   3. Outputs label probabilities (sorted by descending confidence).
 - **Front-End**: Renders predictions using **Bootstrap** cards, lists, or progress bars.
 
-## Project Structure
-sentiment_emotion_app/ 
-├── app_utils.py # Helper functions for model loading and prediction 
-├── main.py # Flask app entry point 
-├── requirements.txt # Dependencies 
-├── templates/ 
+
 │ └── index.html # Main HTML page (Bootstrap form + results) 
 └── venv/ # Virtual environment (excluded via .gitignore)
 
