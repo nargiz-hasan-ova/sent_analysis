@@ -21,8 +21,3 @@ A lightweight Flask application demonstrating **sentiment analysis**, **emotion 
   2. Receives input text via a POST form.
   3. Outputs label probabilities (sorted by descending confidence).
 - **Front-End**: Renders predictions using **Bootstrap** cards, lists, or progress bars.
-
-
-│ └── index.html # Main HTML page (Bootstrap form + results) 
-└── venv/ # Virtual environment (excluded via .gitignore)
-
